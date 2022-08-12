@@ -41,7 +41,7 @@ metadata_list <- function(root) {
 }
 
 
-##' @porcelain GET /metadata/<id> => json
+##' @porcelain GET /metadata/<id> => json(metadata)
 ##'   state root :: root
 metadata_get <- function(root, id) {
   dat <- root$index()$location

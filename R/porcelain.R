@@ -24,7 +24,7 @@
         "/metadata/<id>",
         metadata_get,
         porcelain::porcelain_state(root = state$root),
-        returning = porcelain::porcelain_returning_json(),
+        returning = porcelain::porcelain_returning_json("metadata"),
         validate = validate)
     },
     "GET /file/<hash>" = function(state, validate) {
