@@ -1,0 +1,72 @@
+# outpack.server
+
+<!-- badges: start -->
+[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+[![R build status](https://github.com/mrc-ide/outpack.server/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/outpack.server/actions)
+[![Build status]()](https://buildkite.com/mrc-ide/mrcide/outpack-dot-server?branch=main)
+[![codecov.io](https://codecov.io/github/mrc-ide/outpack.server/coverage.svg?branch=main)](https://codecov.io/github/mrc-ide/outpack.server?branch=main)
+<!-- badges: end -->
+
+This is an implementation of the [outpack](https://mrc-ide.github.io/outpack) HTTP API as an R package using [porcelain](https://reside-ic.github.io/porcelain/) and [plumber](https://docs.rstudio.com/resources/plumber/). We will probably replace this with a higher performance implementation later, but keep the interface the same.
+
+
+```{r, include = FALSE}
+```
+
+## Usage
+
+Assuming that you have an outpack repository at `path`:
+
+```{r}
+docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outpack
+```
+
+### Responses
+
+```{r, results = "asis", echo = FALSE}
+pkgload::load_all()
+
+root <- create_temporary_root(use_file_store = TRUE)
+ids <- create_random_packet_chain(root, 4)
+obj <- api(root, log_level = "fatal")
+
+id <- ids[[1]]
+meta <- root$metadata(id)
+hash <- meta$files$hash
+
+commands <- list(
+  list("GET", "/", NULL),
+  list("GET", "/metadata/list", NULL),
+  list("GET", "/metadata/<id>", sprintf("/metadata/%s", id)),
+  list("GET", "/file/<hash>", sprintf("/file/%s", hash)))
+
+do_response <- function(cmd) {
+  method <- cmd[[1]]
+  path_label <- cmd[[2]]
+  path_use <- cmd[[3]] %||% path_label
+  res <- obj$request(method, path_use)
+  if (is.raw(res$body)) {
+    response <- paste(c(head(res$body, 10), "..."), collapse = " ")
+  } else {
+    response <- jsonlite::prettify(res$body)
+  }
+
+  template <- "### %s %s\n\n```json%s```"
+  sprintf(template, method, path_label, response)
+}
+
+txt <- vapply(commands, do_response, "")
+cat(paste(txt, collapse = "\n\n"))
+```
+
+## Installation
+
+To install `outpack.server`:
+
+```r
+remotes::install_github("mrc-ide/outpack.server", upgrade = FALSE)
+```
+
+## License
+
+MIT © Imperial College of Science, Technology and Medicine
