@@ -8,5 +8,32 @@
         root,
         returning = porcelain::porcelain_returning_json("root"),
         validate = validate)
+    },
+    "GET /metadata/list" = function(state, validate) {
+      porcelain::porcelain_endpoint$new(
+        "GET",
+        "/metadata/list",
+        metadata_list,
+        porcelain::porcelain_state(root = state$root),
+        returning = porcelain::porcelain_returning_json(),
+        validate = validate)
+    },
+    "GET /metadata/get/<id>" = function(state, validate) {
+      porcelain::porcelain_endpoint$new(
+        "GET",
+        "/metadata/get/<id>",
+        metadata_get,
+        porcelain::porcelain_state(root = state$root),
+        returning = porcelain::porcelain_returning_json(),
+        validate = validate)
+    },
+    "GET /file/<hash>" = function(state, validate) {
+      porcelain::porcelain_endpoint$new(
+        "GET",
+        "/file/<hash>",
+        file,
+        porcelain::porcelain_state(root = state$root),
+        returning = porcelain::porcelain_returning_binary(),
+        validate = validate)
     })
 }

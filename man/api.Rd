@@ -4,9 +4,11 @@
 \alias{api}
 \title{Create outpack server}
 \usage{
-api(validate = NULL, log_level = "info")
+api(root, validate = NULL, log_level = "info")
 }
 \arguments{
+\item{root}{Outpack root}
+
 \item{validate}{Logical, indicating if validation should be done
 on responses.  This should be \code{FALSE} in production
 environments.  See \link[porcelain:porcelain]{porcelain::porcelain} for details}

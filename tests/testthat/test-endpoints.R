@@ -17,3 +17,13 @@ test_that("Can construct the api", {
   expect_length(logs, 2)
   expect_equal(logs[[1]]$logger, "outpack.server")
 })
+
+
+test_that("...", {
+  root <- create_temporary_root(use_file_store = TRUE)
+  ids <- create_random_packet_chain(root, 4)
+
+  obj <- api(root)
+  obj$request("GET", "/metadata/list")
+  obj$request("GET", paste0("/metadata/", ids[[1]]))
+})
