@@ -7,6 +7,8 @@
 [![codecov.io](https://codecov.io/github/mrc-ide/outpack.server/coverage.svg?branch=main)](https://codecov.io/github/mrc-ide/outpack.server?branch=main)
 <!-- badges: end -->
 
+This is an implementation of the [outpack](https://mrc-ide.github.io/outpack) HTTP API as an R package using [porcelain](https://reside-ic.github.io/porcelain/) and [plumber](https://docs.rstudio.com/resources/plumber/). We will probably replace this with a higher performance implementation later, but keep the interface the same.
+
 ## Installation
 
 To install `outpack.server`:
