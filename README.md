@@ -16,15 +16,8 @@ This is an implementation of the [outpack](https://mrc-ide.github.io/outpack) HT
 
 Assuming that you have an outpack repository at `path`:
 
-
-```r
-docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outpack
-```
-
-```
-## Error: <text>:1:8: unexpected symbol
-## 1: docker run
-##            ^
+```bash
+docker run -v ${PWD}/path:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outpack
 ```
 
 ### Responses
@@ -36,7 +29,7 @@ docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outp
 
 ### GET /
 
-```{
+```json{
     "status": "success",
     "errors": null,
     "data": {
@@ -48,29 +41,29 @@ docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outp
 
 ### GET /metadata/list
 
-```{
+```json{
     "status": "success",
     "errors": null,
     "data": [
         {
-            "packet": "20220812-151659-08e7831e",
-            "time": "2022-08-12 15:16:59",
-            "hash": "sha256:a0e8462e48be1dfb874e08c5b9b0e00520208b18beee0f8e9bdf54be3bdc8b5f"
+            "packet": "20220812-155808-c873e405",
+            "time": "2022-08-12 15:58:08",
+            "hash": "sha256:df6edb3d6cd50f5aec9308a357111592cde480f45a5f46341877af21ae30d93e"
         },
         {
-            "packet": "20220812-151659-15b10223",
-            "time": "2022-08-12 15:16:59",
-            "hash": "sha256:5787a82395b16cf45ae463e91051df2f3223140076b3bc3964c803b1e422bac9"
+            "packet": "20220812-155808-d5747caf",
+            "time": "2022-08-12 15:58:08",
+            "hash": "sha256:edc70ef51e69f2cde8238142af29a9419bb27c94b320b87e88f617dfc977a46b"
         },
         {
-            "packet": "20220812-151659-1c24b3f0",
-            "time": "2022-08-12 15:16:59",
-            "hash": "sha256:674bc91875d906c3734e403d05220f7f7696a414628ee1c0e2cf961a7f16af98"
+            "packet": "20220812-155808-dbd3ce81",
+            "time": "2022-08-12 15:58:08",
+            "hash": "sha256:a7da8c3464a2da4722b9d15daa98eb13f4f8c1949c6d00100428b2e9d0668f29"
         },
         {
-            "packet": "20220812-151659-22fb492f",
-            "time": "2022-08-12 15:16:59",
-            "hash": "sha256:0192120869f1653da489b096af1945a04948c5d4c325f56622b2b9ce834fa57b"
+            "packet": "20220812-155808-e21bc5fc",
+            "time": "2022-08-12 15:58:08",
+            "hash": "sha256:df1b91aaf3393483515ac61596aa35117891eacc533a55ec2f4759d0036514f9"
         }
     ]
 }
@@ -78,23 +71,23 @@ docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outp
 
 ### GET /metadata/<id>
 
-```{
+```json{
     "status": "success",
     "errors": null,
     "data": {
         "schemaVersion": "0.0.1",
         "name": "a",
-        "id": "20220812-151659-08e7831e",
+        "id": "20220812-155808-c873e405",
         "time": {
-            "start": 1660317419.035,
-            "end": 1660317419.0352
+            "start": 1660319888.7832,
+            "end": 1660319888.7835
         },
         "parameters": null,
         "files": [
             {
                 "path": "data.rds",
                 "size": 112,
-                "hash": "sha256:39ff1019980fc94824e97ce20334991becf8bd2754b93b6906dd182c6b0414d0"
+                "hash": "sha256:8690e67e8f46e228f003f94aed69d216bfbfee0bf2e9ab5ecf894b9926382278"
             }
         ],
         "depends": [
@@ -409,7 +402,7 @@ docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outp
 
 ### GET /file/<hash>
 
-```1f 8b 08 00 00 00 00 00 00 03 ...```
+```json1f 8b 08 00 00 00 00 00 00 03 ...```
 
 ## Installation
 

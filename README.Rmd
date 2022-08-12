@@ -17,8 +17,8 @@ This is an implementation of the [outpack](https://mrc-ide.github.io/outpack) HT
 
 Assuming that you have an outpack repository at `path`:
 
-```{r}
-docker run -v ${PWD}:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outpack
+```bash
+docker run -v ${PWD}/path:/outpack -p 8001:8001 mrcide/outpack.server:prototype /outpack
 ```
 
 ### Responses
