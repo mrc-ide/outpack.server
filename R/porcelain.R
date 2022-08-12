@@ -18,10 +18,10 @@
         returning = porcelain::porcelain_returning_json(),
         validate = validate)
     },
-    "GET /metadata/get/<id>" = function(state, validate) {
+    "GET /metadata/<id>" = function(state, validate) {
       porcelain::porcelain_endpoint$new(
         "GET",
-        "/metadata/get/<id>",
+        "/metadata/<id>",
         metadata_get,
         porcelain::porcelain_state(root = state$root),
         returning = porcelain::porcelain_returning_json(),
@@ -31,7 +31,7 @@
       porcelain::porcelain_endpoint$new(
         "GET",
         "/file/<hash>",
-        file,
+        file_get,
         porcelain::porcelain_state(root = state$root),
         returning = porcelain::porcelain_returning_binary(),
         validate = validate)

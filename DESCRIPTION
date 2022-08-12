@@ -9,7 +9,7 @@ Description: Description of the pacakge in more than one full sentence.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("rd", "namespace", "porcelain::porcelain_roclet"))
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 URL: https://github.com/mrc-ide/outpack.server
 BugReports: https://github.com/mrc-ide/outpack.server/issues
 Imports:

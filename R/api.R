@@ -25,6 +25,7 @@ api <- function(root, validate = NULL, log_level = "info") {
   api
 }
 
+
 ##' @porcelain GET / => json(root)
 root <- function() {
   versions <- list(outpack = package_version_string("outpack"),
@@ -36,28 +37,31 @@ root <- function() {
 ##' @porcelain GET /metadata/list => json
 ##'   state root :: root
 metadata_list <- function(root) {
-  root$index()$location[c("packet", "time", "hash")]
+  root$index(refresh = TRUE)$location[c("packet", "time", "hash")]
 }
 
 
-##' @porcelain GET /metadata/get/<id> => json
+##' @porcelain GET /metadata/<id> => json
 ##'   state root :: root
 metadata_get <- function(root, id) {
   dat <- root$index()$location
   if (!any(dat$packet == id)) {
-    ## TODO: return 404 here?
-    stop(sprintf("packet id '%s' not found", id))
+    porcelain::porcelain_stop(sprintf("packet id '%s' not found", id),
+                              code = "NOT_FOUND", status_code = 404L)
   }
-  path <- file.path(root$path, ".outpack", "metadata", id)
-  str <- read_string(path)
-  class(str) <- "json"
-  str
+  ## TODO: add outpack method to make this easier
+  json_string(read_string(file.path(root$path, ".outpack", "metadata", id)))
 }
 
 
 ##' @porcelain GET /file/<hash> => binary
 ##'   state root :: root
 ##'
-file <- function(root, hash) {
-  browser()
+file_get <- function(root, hash) {
+  path <- root$files$filename(hash)
+  if (!file.exists(path)) {
+    porcelain::porcelain_stop(sprintf("hash '%s' not found", hash),
+                              code = "NOT_FOUND", status_code = 404L)
+  }
+  read_binary(path)
 }

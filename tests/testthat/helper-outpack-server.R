@@ -1,8 +1,7 @@
-outpack_server_endpoint <- function(..., validate = TRUE) {
-  ## TODO: export from porcelain!
-  ## TODO: should this default be true for testing?
-  porcelain:::porcelain_package_endpoint("outpack.server", ...,
-                                         validate = validate)
+outpack_server_endpoint <- function(method, path, root, validate = TRUE) {
+  porcelain::porcelain_package_endpoint("outpack.server", method, path,
+                                        state = list(root = root),
+                                        validate = validate)
 }
 
 
@@ -54,4 +53,5 @@ create_temporary_root <- function(...) {
 
 dir_create <- function(path) {
   dir.create(path, FALSE, TRUE)
+  path
 }

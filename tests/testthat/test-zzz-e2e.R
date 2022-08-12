@@ -1,5 +1,6 @@
 test_that("can run server", {
-  bg <- porcelain::porcelain_background$new(api)
+  root <- create_temporary_root(use_file_store = TRUE)
+  bg <- porcelain::porcelain_background$new(api, list(root))
   bg$start()
   r <- bg$request("GET", "/")
   expect_equal(httr::status_code(r), 200)
