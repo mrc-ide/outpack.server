@@ -23,6 +23,7 @@ test_that("Can parse arguments", {
 
 
 test_that("Can construct api", {
+  skip_if_not_installed("mockery")
   mock_run <- mockery::mock()
   mock_api <- mockery::mock(list(run = mock_run))
   mockery::stub(main, "api", mock_api)

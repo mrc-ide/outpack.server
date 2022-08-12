@@ -1,4 +1,5 @@
 test_that("can run server", {
+  skip_if_not_installed("httr")
   root <- create_temporary_root(use_file_store = TRUE)
   bg <- porcelain::porcelain_background$new(api, list(root))
   bg$start()
