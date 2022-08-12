@@ -34,7 +34,7 @@ root <- function() {
 }
 
 
-##' @porcelain GET /metadata/list => json
+##' @porcelain GET /metadata/list => json(list)
 ##'   state root :: root
 metadata_list <- function(root) {
   root$index(refresh = TRUE)$location[c("packet", "time", "hash")]

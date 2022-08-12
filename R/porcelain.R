@@ -15,7 +15,7 @@
         "/metadata/list",
         metadata_list,
         porcelain::porcelain_state(root = state$root),
-        returning = porcelain::porcelain_returning_json(),
+        returning = porcelain::porcelain_returning_json("list"),
         validate = validate)
     },
     "GET /metadata/<id>" = function(state, validate) {
