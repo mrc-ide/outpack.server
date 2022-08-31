@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.0.4
+FROM rocker/r-ver:4.2.1
 
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
@@ -15,5 +15,11 @@ COPY DESCRIPTION /tmp/DESCRIPTION
 RUN install2.r --error remotes &&  \
         Rscript -e 'remotes::install_deps("/tmp")'
 
+EXPOSE 8001
+
 COPY . /src
-RUN R CMD INSTALL --install-tests /src && rm -rf /src
+RUN R CMD INSTALL --install-tests /src && \
+        cp /src/docker/outpack.server /usr/local/bin && \
+        rm -rf /src
+
+ENTRYPOINT ["/usr/local/bin/outpack.server"]
