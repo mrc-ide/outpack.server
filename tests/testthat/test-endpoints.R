@@ -29,6 +29,7 @@ test_that("Can list metadata", {
 
   cols <- c("packet", "time", "hash")
   expected <- root$index()$location[cols]
+  expected$time <- as.numeric(expected$time)
 
   expect_true(res$validated)
   expect_equal(res$content_type, "application/json")
