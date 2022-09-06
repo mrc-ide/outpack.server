@@ -8,7 +8,7 @@
                 "$ref": "id.json"
             },
             "time": {
-                "type": "string"
+                "type": "number"
             },
             "hash": {
                 "$ref": "hash.json"
