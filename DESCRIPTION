@@ -17,7 +17,7 @@ Imports:
     jsonlite,
     lgr,
     outpack,
-    porcelain
+    porcelain (>= 0.1.10)
 Suggests:
     httr,
     mockery,
