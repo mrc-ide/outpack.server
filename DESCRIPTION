@@ -1,6 +1,6 @@
 Package: outpack.server
 Title: Example Outpack Server
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
                     email = "rich.fitzjohn@gmail.com"),
              person("Imperial College of Science, Technology and Medicine",
@@ -17,7 +17,7 @@ Imports:
     jsonlite,
     lgr,
     outpack,
-    porcelain
+    porcelain (>= 0.1.10)
 Suggests:
     httr,
     mockery,

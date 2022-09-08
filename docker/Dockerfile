@@ -10,10 +10,14 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 # Without this, we are unable to pick up more recent packages
 COPY docker/Rprofile.site /usr/local/lib/R/etc/Rprofile.site
 
-COPY DESCRIPTION /tmp/DESCRIPTION
-
-RUN install2.r --error remotes &&  \
-        Rscript -e 'remotes::install_deps("/tmp")'
+RUN install2.r --error \
+        --repos https://packagemanager.rstudio.com/all/__linux__/focal/latest \
+        --repos https://mrc-ide.r-universe.dev \
+        docopt \
+        jsonlite \
+        lgr \
+        outpack \
+        porcelain
 
 EXPOSE 8001
 
