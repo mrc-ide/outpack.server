@@ -18,13 +18,22 @@
         returning = porcelain::porcelain_returning_json("list"),
         validate = validate)
     },
-    "GET /metadata/<id>" = function(state, validate) {
+    "GET /metadata/<id>/json" = function(state, validate) {
       porcelain::porcelain_endpoint$new(
         "GET",
-        "/metadata/<id>",
-        metadata_get,
+        "/metadata/<id>/json",
+        metadata_get_json,
         porcelain::porcelain_state(root = state$root),
         returning = porcelain::porcelain_returning_json("metadata"),
+        validate = validate)
+    },
+    "GET /metadata/<id>/text" = function(state, validate) {
+      porcelain::porcelain_endpoint$new(
+        "GET",
+        "/metadata/<id>/text",
+        metadata_get_text,
+        porcelain::porcelain_state(root = state$root),
+        returning = porcelain::porcelain_returning_text(),
         validate = validate)
     },
     "GET /file/<hash>" = function(state, validate) {

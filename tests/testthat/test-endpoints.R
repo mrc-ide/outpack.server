@@ -43,7 +43,7 @@ test_that("Can retrieve metadata", {
   meta <- root$metadata(id)
   hash <- meta$files$hash
 
-  endpoint <- outpack_server_endpoint("GET", "/metadata/<id>", root)
+  endpoint <- outpack_server_endpoint("GET", "/metadata/<id>/json", root)
   res <- endpoint$run(id)
   expect_true(res$validated)
   expect_identical(
@@ -54,10 +54,27 @@ test_that("Can retrieve metadata", {
 })
 
 
+test_that("Can retrieve metadata in plain text", {
+  root <- create_temporary_root(use_file_store = TRUE)
+  id <- create_random_packet(root)
+  meta <- root$metadata(id)
+  hash <- meta$files$hash
+
+  endpoint <- outpack_server_endpoint("GET", "/metadata/<id>/text", root)
+  res <- endpoint$run(id)
+  expect_true(res$validated)
+  expect_identical(
+    res$data,
+    json_string(read_string(file.path(root$path, ".outpack", "metadata", id))))
+  expect_equal(res$status_code, 200)
+  expect_equal(res$content_type, "text/plain")
+})
+
+
 test_that("Throw 404 if packet metadata not found", {
   root <- create_temporary_root(use_file_store = TRUE)
   id <- "20220812-141127-c568fb24"
-  endpoint <- outpack_server_endpoint("GET", "/metadata/<id>", root)
+  endpoint <- outpack_server_endpoint("GET", "/metadata/<id>/json", root)
   res <- endpoint$run(id)
 
   expect_equal(res$status_code, 404)

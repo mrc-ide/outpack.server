@@ -43,8 +43,23 @@ metadata_list <- function(root) {
 }
 
 
-##' @porcelain GET /metadata/<id> => json(metadata)
+## TODO: It might be nicer to have a single GET endpoint that flips
+## based on a header, but porcelain does not allow this!
+
+##' @porcelain GET /metadata/<id>/json => json(metadata)
 ##'   state root :: root
+metadata_get_json <- function(root, id) {
+  metadata_get(root, id)
+}
+
+
+##' @porcelain GET /metadata/<id>/text => text
+##'   state root :: root
+metadata_get_text <- function(root, id) {
+  metadata_get(root, id)
+}
+
+
 metadata_get <- function(root, id) {
   dat <- root$index()$location
   if (!any(dat$packet == id)) {
