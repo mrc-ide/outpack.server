@@ -412,6 +412,11 @@ To install `outpack.server`:
 remotes::install_github("mrc-ide/outpack.server", upgrade = FALSE)
 ```
 
+## Schema
+
+The `outpack` schema is imported into this package by running `./scripts/import_schema`, and needs to be 
+kept manually up to date by re-running that script as needed.
+
 ## License
 
 MIT © Imperial College of Science, Technology and Medicine
