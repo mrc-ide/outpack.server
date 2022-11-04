@@ -37,7 +37,7 @@ root <- function() {
 ##' @porcelain GET /metadata/list => json(list)
 ##'   state root :: root
 metadata_list <- function(root) {
-  ret <- root$index(refresh = TRUE)$location[c("packet", "time", "hash")]
+  ret <- root$index(skip_cache = TRUE)$location[c("packet", "time", "hash")]
   ret$time <- as.numeric(unclass(ret$time))
   ret
 }

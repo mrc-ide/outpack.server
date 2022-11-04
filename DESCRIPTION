@@ -16,7 +16,7 @@ Imports:
     docopt,
     jsonlite,
     lgr,
-    outpack,
+    outpack (>= 0.2.0),
     porcelain (>= 0.1.10)
 Suggests:
     httr,

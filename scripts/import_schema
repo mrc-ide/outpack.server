@@ -5,4 +5,4 @@ if (pkgload::pkg_name(root) != "outpack.server") {
 }
 copy <- c("metadata.json", "id.json", "hash.json")
 src <- system.file(file.path("schema", copy), package = "outpack")
-fs::file_copy(src, file.path(root, "inst", "schema"))
+fs::file_copy(src, file.path(root, "inst", "schema"), overwrite = TRUE)
