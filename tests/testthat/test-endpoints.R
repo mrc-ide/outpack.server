@@ -88,14 +88,14 @@ test_that("Can retrieve files", {
   root <- create_temporary_root(use_file_store = TRUE)
   id <- create_random_packet(root)
   meta <- root$metadata(id)
-  hash <- meta$files$hash
+  hash <- meta$files$hash[meta$files$path == "data.rds"]
 
   endpoint <- outpack_server_endpoint("GET", "/file/<hash>", root)
   res <- endpoint$run(hash)
   expect_true(res$validated)
   expect_identical(
     res$data,
-    read_binary(file.path(root$path, "archive", "data", id, meta$files$path)))
+    read_binary(file.path(root$path, "archive", "data", id, "data.rds")))
   expect_equal(res$status_code, 200)
   expect_equal(res$content_type, "application/octet-stream")
 })
